@@ -40,8 +40,10 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
     * karate.sleep(3000)
 
   Scenario: Get the pet by ID
+    * configure retry = { count: 5, interval: 1000 }
     # Use the same petId from the previous scenario
     Given path 'pet', petId
+    And retry until responseStatus == 200
     When method get
     Then status 200
 
