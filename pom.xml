@@ -47,11 +47,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <!-- Run only classes that end with Runner.java -->
                     <includes>
                         <include>**/*Runner.java</include>
                     </includes>
-                    <!-- Ensure UTF-8 output for reports -->
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
@@ -67,12 +65,11 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <!-- directory where Karate writes the cucumber json files -->
-                            <jsonDir>${project.build.directory}/karate-reports</jsonDir>
-                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
-                            <projectName>Karate Petstore API Tests</projectName>
-                            <buildNumber>${project.version}</buildNumber>
-                            <skip>false</skip>
+                            <projectName>Petshop-karate-test</projectName>
+                            <jsonFiles>
+                                <param>target/karate-reports/karate-summary.json</param>
+                            </jsonFiles>
+                            <outputDirectory>target/cucumber-html-reports</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

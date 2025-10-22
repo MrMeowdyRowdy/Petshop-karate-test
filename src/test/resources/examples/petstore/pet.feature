@@ -36,8 +36,6 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
 
     # Save response for next steps
     * def createdPet = response
-    * karate.log('Waiting for pet to be available...')
-    * karate.sleep(3000)
 
   Scenario: Get the pet by ID
     * configure retry = { count: 5, interval: 1000 }
@@ -82,6 +80,7 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
 
 
   Scenario: Get pets by status "sold"
+    * configure retry = { count: 5, interval: 1000 }
     # Query pets with status sold
     Given path 'pet', 'findByStatus'
     And param status = 'sold'
@@ -90,7 +89,6 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
 
     # Validate that our updated pet is in the list
     * def soldPets = response
-    * print 'Sold pets response:', response
     * def updatedPet =
       """
       {  id: #(petId),
