@@ -9,6 +9,7 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
       }
       """
     * def petId = callonce createPetId
+    * print 'Using petId: ' + petId
 
   Scenario: Create a new pet
     # JSON payload as JS object
@@ -22,7 +23,7 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
     status: 'available'
     }
     """
-
+    * print 'Creating pet with payload: ' + newPet
     # POST request to create the pet
     Given path 'pet'
     And request newPet
@@ -38,7 +39,7 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
     * def createdPet = response
 
   Scenario: Get the pet by ID
-    * configure retry = { count: 5, interval: 1000 }
+    * configure retry = { count: 5, interval: 2000 }
     # Use the same petId from the previous scenario
     Given path 'pet', petId
     And retry until responseStatus == 200
@@ -52,6 +53,7 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
 
   Scenario: Update pet's name and mark as sold
     # Build the updated JSON payload
+    print 'Looking for the pet with id: ' + petId
     * def updatedPet =
       """
       {  id: #(petId),
@@ -80,7 +82,7 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
 
 
   Scenario: Get pets by status "sold"
-    * configure retry = { count: 5, interval: 1000 }
+    * configure retry = { count: 5, interval: 2000 }
     # Query pets with status sold
     Given path 'pet', 'findByStatus'
     And param status = 'sold'
