@@ -1,7 +1,7 @@
 package examples.petstore;
 
 import com.intuit.karate.Runner;
-import com.intuit.karate.core.KarateStats;
+import com.intuit.karate.Results;
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
 import org.apache.commons.io.FileUtils;
@@ -19,12 +19,12 @@ class PetRunner {
 
     @Test
     void runAllWithCucumberReport() {
-        KarateStats stats = Runner.path("classpath:examples/petstore")
+        Results results = Runner.path("classpath:examples/petstore")
                 .outputCucumberJson(true)
                 .parallel(1);
 
-        assertEquals(0, stats.getFailCount(), stats.getErrorMessages());
-        generateReport(stats.getReportDir());
+        assertEquals(0, results.getFailCount(), results.getErrorMessages());
+        generateReport(results.getReportDir());
     }
 
     private static void generateReport(String karateOutputPath) {
