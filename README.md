@@ -1,99 +1,88 @@
-# Karate API Test Project
+# Karate Petstore API Tests
 
-## Overview
+## Project Overview
 
-This project contains automated API tests using **Karate** for testing the Petstore API. The tests cover scenarios like creating pets, updating them, and querying pets by status (in this case `sold`).
+This repository contains a **Karate-based API test suite** for the [Swagger Petstore](https://petstore.swagger.io/) service.
+The suite exercises the main lifecycle for a pet resource:
 
-The tests are designed to be **repeatable**, **robust**, and easy to run locally.
+1. Create a new pet.
+2. Update the pet's attributes.
+3. Retrieve pets filtered by status (e.g., `sold`).
 
 ---
 
 ## Prerequisites
 
-* Java 17 or higher
-* Maven 3.9.X (for dependency management, 3.9.9 used here)
-* IntelliJ
+* Java 17
+* Maven 3.9.x
+* Chrome browser (for viewing HTML reports)
 * Internet connection
+* IntelliJ IDEA (recommended IDE)
 
 ---
 
-## Project StructureS
+## Project Structure
 
 ```
-src/
- └─ test/
-     └─ java/
-         └─ features/
-             ├─ CreatePet.feature
-             ├─ UpdatePet.feature
-             ├─ GetPetsByStatus.feature
-             └─ ...
-karate-config.js      # Base configuration
-pom.xml               # Maven dependencies
+src
+├── main
+│   └── java/org/example/Main.java          # Optional placeholder entry point
+└── test
+    ├── java/examples/petstore/             # Karate JUnit runner (PetRunner)
+    └── resources/examples/petstore/        # Karate feature files (pet.feature)
 ```
+
+Additional project files of interest:
+
+* `pom.xml` – Maven dependencies and build configuration
 
 ---
 
-## Installing Dependencies
+## Setup & Dependencies
 
-The project uses Maven for dependency management. Run:
+Maven handles dependency resolution. The first build downloads all required Karate artifacts automatically. No extra setup is needed beyond installing the prerequisites.
+
+---
+
+## How to Run the Tests
+
+### Run from IntelliJ IDEA (recommended)
+
+1. Open the project in IntelliJ IDEA.
+2. Open the **Maven** tool window (usually on the right-hand side).
+3. Under the project, expand **Lifecycle** and double-click **verify**.
+   * This runs `mvn clean verify` using the integrated Maven runner.
+4. Alternatively, right-click `PetRunner` or a `.feature` file and select **Run** for an ad-hoc execution.
+
+### Run from a terminal
 
 ```bash
-mvn clean install
+mvn clean verify
 ```
 
-This will download all necessary Karate dependencies.
+The `verify` phase compiles the project, executes the Karate scenarios, and produces the reports.
 
 ---
 
-## Running Tests
+## Test Results & Reports
 
-You can run tests using Maven or directly in your IDE.
+Karate generates both summary and detailed Cucumber-style HTML reports inside the `target` directory.
 
-### Run all tests via Maven:
+* Summary: `target/karate-reports/karate-summary.html`
+* Cucumber HTML reports: `target/cucumber-html-reports/`
 
-```bash
-mvn test
-```
+To view the Cucumber report:
 
-### Run a specific feature:
-
-```bash
-mvn test -Dkarate.options="--tags @smoke"
-```
-
-### Run via IntelliJ:
-
-1. Right-click the `.feature` file.
-2. Select `Run 'Feature: <filename>'`.
+1. Open the project `target` folder after a test run.
+2. Navigate to `cucumber-html-reports`.
+3. Locate a file named `report-feature_XXXXXXXXXXX.html`.
+4. Open it in a browser (double-click or drag the file into a browser window) to inspect the scenario breakdown and results.
 
 ---
 
-## Test Results
+## Helpful Tips
 
-After running tests, Karate will generate HTML and JSON reports locally. By default, results are stored in:
-
-```
-target/surefire-reports/
-```
-
-Example files:
-
-* `karate-summary.html` – Full test report
-* `karate-summary.json` – JSON output
-* `*.txt` – Logs for each scenario
-
-You can open the HTML report in a browser to see detailed test results.
-
----
-
-## Tips for Reliable Tests
-
-* Avoid hardcoding IDs; let the API generate them or use UUIDs.
-* Match only relevant fields when validating responses (e.g., `name`, `status`) to avoid failures from extra fields added by the API.
-* Use `karate.log(response)` in your scenarios to debug API responses.
-
----
-
-
+* Avoid hard-coded identifiers—prefer dynamically generated values or data returned by the API.
+* Log responses with `karate.log()` while authoring new scenarios to aid debugging.
+* Keep assertions focused on business-relevant fields so the tests remain stable if the API adds new properties.
 
