@@ -26,7 +26,6 @@ The suite exercises the main lifecycle for a pet resource:
 ```
 src
 ├── main
-│   └── java/org/example/Main.java          # Optional placeholder entry point
 └── test
     ├── java/examples/petstore/             # Karate JUnit runner (PetRunner)
     └── resources/examples/petstore/        # Karate feature files (pet.feature)
