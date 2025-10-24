@@ -39,7 +39,7 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
     * def createdPet = response
 
   Scenario: Get the pet by ID
-    * configure retry = { count: 5, interval: 2000 }
+    * configure retry = { count: 7, interval: 2000 }
     # Use the same petId from the previous scenario
     Given path 'pet', petId
     And retry until responseStatus == 200
@@ -82,7 +82,7 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
 
 
   Scenario: Get pets by status "sold"
-    * configure retry = { count: 5, interval: 2000 }
+    * configure retry = { count: 7, interval: 2000 }
     # Query pets with status sold
     Given path 'pet', 'findByStatus'
     And param status = 'sold'

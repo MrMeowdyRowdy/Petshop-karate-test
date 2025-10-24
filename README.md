@@ -65,7 +65,7 @@ The `verify` phase compiles the project, executes the Karate scenarios, and prod
 
 ## Test Results & Reports
 
-Karate generates both summary and detailed Cucumber-style HTML reports inside the `target` directory.
+Project generates both summary and detailed Cucumber-style HTML reports inside the `target` directory.
 
 * Summary: `target/karate-reports/karate-summary.html`
 * Cucumber HTML reports: `target/cucumber-html-reports/`
@@ -75,13 +75,4 @@ To view the Cucumber report:
 1. Open the project `target` folder after a test run.
 2. Navigate to `cucumber-html-reports`.
 3. Locate a file named `report-feature_XXXXXXXXXXX.html`.
-4. Open it in a browser (double-click or drag the file into a browser window) to inspect the scenario breakdown and results.
-
----
-
-## Helpful Tips
-
-* Avoid hard-coded identifiers—prefer dynamically generated values or data returned by the API.
-* Log responses with `karate.log()` while authoring new scenarios to aid debugging.
-* Keep assertions focused on business-relevant fields so the tests remain stable if the API adds new properties.
-
+4. Open it in a browser (double-click the file on a file manager or drag the file into a browser window) to inspect the scenario breakdown and results.
