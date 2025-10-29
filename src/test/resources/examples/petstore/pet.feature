@@ -2,6 +2,7 @@ Feature: Pet lifecycle tests (create -> get -> update -> find by status)
 
   Background:
     * url 'https://petstore.swagger.io/v2'
+    * def petData = read('classpath:examples/petstore/petData.json')
     * def createPetId =
       """
       function() {

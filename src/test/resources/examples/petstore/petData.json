@@ -1,0 +1,36 @@
+{
+  "newPet": {
+    "category": {
+      "id": 1,
+      "name": "dogs"
+    },
+    "name": "doggo-create-test",
+    "photoUrls": [
+      "https://example.com/photo1.jpg"
+    ],
+    "tags": [
+      {
+        "id": 1,
+        "name": "tag1"
+      }
+    ],
+    "status": "available"
+  },
+  "updatedPet": {
+    "category": {
+      "id": 1,
+      "name": "dogs"
+    },
+    "name": "doggo-updated-test",
+    "photoUrls": [
+      "https://example.com/photo1.jpg"
+    ],
+    "tags": [
+      {
+        "id": 1,
+        "name": "tag1"
+      }
+    ],
+    "status": "sold"
+  }
+}
